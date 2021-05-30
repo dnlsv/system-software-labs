@@ -1,0 +1,5 @@
+﻿  Main.cpp
+D:\University\СПО\Lecture\Lecture_Server\Lecture_Server\Main.cpp(10,1): warning C4326: возвращаемый тип "main" должен быть "int", а не "void"
+D:\University\СПО\Lecture\Lecture_Server\Lecture_Server\Main.cpp(50,23): warning C4018: <: несоответствие типов со знаком и без знака
+D:\University\СПО\Lecture\Lecture_Server\Lecture_Server\Main.cpp(62,23): warning C4018: <: несоответствие типов со знаком и без знака
+  Lecture_Server.vcxproj -> D:\University\СПО\Lecture\Lecture_Server\Debug\Lecture_Server.exe
