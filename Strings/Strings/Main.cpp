@@ -8,77 +8,77 @@ string concatenationFun(string, string);
 
 int main()
 {
-	setlocale(LC_ALL, "rus");
+    setlocale(LC_ALL, ".UTF8");
 
-	string str1, str2;
+    string str1, str2;
 
-	cout << "Ââåäèòå 2 ñòğîêè" << endl;
-	cout << endl;
+    cout << "Ğ’Ğ²ĞµĞ´Ğ¸Ñ‚Ğµ 2 ÑÑ‚Ñ€Ğ¾ĞºĞ¸" << endl;
+    cout << endl;
 
-	cout << "1 ñòğîêà: ";
-	cin >> str1;
-	cout << "2 ñòğîêà: ";
-	cin >> str2;
+    cout << "1 ÑÑ‚Ñ€Ğ¾ĞºĞ°: ";
+    cin >> str1;
+    cout << "2 ÑÑ‚Ñ€Ğ¾ĞºĞ°: ";
+    cin >> str2;
 
-	int sum;
-	string str;
+    int sum;
+    string str;
 
-	cout << endl;
+    cout << endl;
 
-	if (integerFun(str1, str2))
-	{
-		sum = sumFun(str1, str2);
-		cout << "Ñóììà ÷èñåë: " << sum << endl;
-	}
-	else
-	{
-		str = concatenationFun(str1, str2);
-		cout << "Êîíêàòåíàöèÿ ñòğîê: " << str << endl;
-	}
+    if (integerFun(str1, str2))
+    {
+        sum = sumFun(str1, str2);
+        cout << "Ğ¡ÑƒĞ¼Ğ¼Ğ° Ñ‡Ğ¸ÑĞµĞ»: " << sum << endl;
+    }
+    else
+    {
+        str = concatenationFun(str1, str2);
+        cout << "ĞšĞ¾Ğ½ĞºĞ°Ñ‚ĞµĞ½Ğ°Ñ†Ğ¸Ñ ÑÑ‚Ñ€Ğ¾Ğº: " << str << endl;
+    }
 
-	return 0;
+    return 0;
 }
 
 bool integerFun(string str1, string str2)
 {
-	bool flag = true;
-	if (str1.at(0) == '+' || str1.at(0) == '-')
-	{
-		if (str2.at(0) == '+' || str2.at(0) == '-')
-		{
-			for (int i = 1; i < str1.length(); i++)
-				if (str1.at(i) < '0' || str1.at(i) > '9')
-					flag = false;
-			for (int i = 1; i < str2.length(); i++)
-				if (str2.at(i) < '0' || str2.at(i) > '9')
-					flag = false;
-		}
-		else
-			flag = false;
-	}
-	else
-		flag = false;
+    bool flag = true;
+    if (str1.at(0) == '+' || str1.at(0) == '-')
+    {
+        if (str2.at(0) == '+' || str2.at(0) == '-')
+        {
+            for (int i = 1; i < str1.length(); i++)
+                if (str1.at(i) < '0' || str1.at(i) > '9')
+                    flag = false;
+            for (int i = 1; i < str2.length(); i++)
+                if (str2.at(i) < '0' || str2.at(i) > '9')
+                    flag = false;
+        }
+        else
+            flag = false;
+    }
+    else
+        flag = false;
 
-	return flag;
+    return flag;
 }
 
 int sumFun(string str1, string str2)
 {
-	int sum, a, b;
+    int sum, a, b;
 
-	a = atoi(str1.c_str());
-	b = atoi(str2.c_str());
+    a = atoi(str1.c_str());
+    b = atoi(str2.c_str());
 
-	sum = a + b;
+    sum = a + b;
 
-	return sum;
+    return sum;
 }
 
 string concatenationFun(string str1, string str2)
 {
-	string str;
+    string str;
 
-	str = str1 + str2;
+    str = str1 + str2;
 
-	return str;
+    return str;
 }

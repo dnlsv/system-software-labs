@@ -3,13 +3,13 @@
 int main()
 
 {
-	STARTUPINFO start = { sizeof(start) };
+    STARTUPINFO start = { sizeof(start) };
 
-	PROCESS_INFORMATION procinfo;
+    PROCESS_INFORMATION procinfo;
 
-	TCHAR CommandLine[] = TEXT("../Debug/Seconds/Seconds.exe");
+    TCHAR CommandLine[] = TEXT("../Debug/Seconds/Seconds.exe");
 
-	CreateProcess(NULL, CommandLine, NULL, NULL, FALSE, 0, NULL, NULL, &start, &procinfo);
+    CreateProcess(NULL, CommandLine, NULL, NULL, FALSE, 0, NULL, NULL, &start, &procinfo);
 
-	return 0;
+    return 0;
 }

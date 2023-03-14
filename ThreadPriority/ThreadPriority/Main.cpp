@@ -14,119 +14,119 @@ int executeTime(HANDLE);
 
 int main()
 {
-	setlocale(LC_ALL, "rus");
+    setlocale(LC_ALL, ".UTF8");
 
-	flag = true;
+    flag = true;
 
-	cout << "Ââåäèòå äâå ñòðîêè" << endl;
-	cout << endl;
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð²Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ¸" << endl;
+    cout << endl;
 
-	cout << "1 ñòðîêà: ";
-	cin >> str1;
-	cout << "2 ñòðîêà: ";
-	cin >> str2;
+    cout << "1 ÑÑ‚Ñ€Ð¾ÐºÐ°: ";
+    cin >> str1;
+    cout << "2 ÑÑ‚Ñ€Ð¾ÐºÐ°: ";
+    cin >> str2;
 
-	HANDLE integerHandle = NULL, sumHandle = NULL, concatenationHandle = NULL;
+    HANDLE integerHandle = NULL, sumHandle = NULL, concatenationHandle = NULL;
 
-	DWORD integerThread;
-	integerHandle = CreateThread(NULL, NULL, IntegerFunction, NULL, NULL, &integerThread);
-	SetThreadPriority(integerHandle, THREAD_PRIORITY_ABOVE_NORMAL);
-	ResumeThread(integerHandle);
-	Sleep(1000);
+    DWORD integerThread;
+    integerHandle = CreateThread(NULL, NULL, IntegerFunction, NULL, NULL, &integerThread);
+    SetThreadPriority(integerHandle, THREAD_PRIORITY_ABOVE_NORMAL);
+    ResumeThread(integerHandle);
+    Sleep(1000);
 
-	if (flag == true)
-	{
-		DWORD sumThread;
-		sumHandle = CreateThread(NULL, NULL, SumFunction, NULL, NULL, &sumThread);
-		SetThreadPriority(sumHandle, THREAD_PRIORITY_LOWEST);
-		ResumeThread(sumHandle);
-		Sleep(1000);
-	}
-	else
-	{
-		DWORD concatenationThread;
-		concatenationHandle = CreateThread(NULL, NULL, ConcatenationFunction, NULL, NULL, &concatenationThread);
-		SetThreadPriority(concatenationHandle, THREAD_PRIORITY_IDLE);
-		ResumeThread(concatenationHandle);
-		Sleep(1000);
-	}
+    if (flag == true)
+    {
+        DWORD sumThread;
+        sumHandle = CreateThread(NULL, NULL, SumFunction, NULL, NULL, &sumThread);
+        SetThreadPriority(sumHandle, THREAD_PRIORITY_LOWEST);
+        ResumeThread(sumHandle);
+        Sleep(1000);
+    }
+    else
+    {
+        DWORD concatenationThread;
+        concatenationHandle = CreateThread(NULL, NULL, ConcatenationFunction, NULL, NULL, &concatenationThread);
+        SetThreadPriority(concatenationHandle, THREAD_PRIORITY_IDLE);
+        ResumeThread(concatenationHandle);
+        Sleep(1000);
+    }
 
-	cout << endl;
-	cout << "Öåëî÷èñëåííûé ïîòîê ðàáîòàë " << executeTime(integerHandle) << " ìñ" << endl;
-	cout << "Ïîòîê ñóììû ðàáîòàë " << executeTime(sumHandle) << " ìñ" << endl;
-	cout << "Ïîòîê êîíêàòåíàöèè ðàáîòàë " << executeTime(concatenationHandle) << " ìñ" << endl;
-
-
-	if (flag == true)
-		cout << endl << "Ñóììà ÷èñåë: " << sum << endl;
-	else
-		cout << endl << "Êîíêàòåíàöèÿ ñòðîê: " << str << endl;
+    cout << endl;
+    cout << "Ð¦ÐµÐ»Ð¾Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ñ‹Ð¹ Ð¿Ð¾Ñ‚Ð¾Ðº Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð» " << executeTime(integerHandle) << " Ð¼Ñ" << endl;
+    cout << "ÐŸÐ¾Ñ‚Ð¾Ðº ÑÑƒÐ¼Ð¼Ñ‹ Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð» " << executeTime(sumHandle) << " Ð¼Ñ" << endl;
+    cout << "ÐŸÐ¾Ñ‚Ð¾Ðº ÐºÐ¾Ð½ÐºÐ°Ñ‚ÐµÐ½Ð°Ñ†Ð¸Ð¸ Ñ€Ð°Ð±Ð¾Ñ‚Ð°Ð» " << executeTime(concatenationHandle) << " Ð¼Ñ" << endl;
 
 
-	return 0;
+    if (flag == true)
+        cout << endl << "Ð¡ÑƒÐ¼Ð¼Ð° Ñ‡Ð¸ÑÐµÐ»: " << sum << endl;
+    else
+        cout << endl << "ÐšÐ¾Ð½ÐºÐ°Ñ‚ÐµÐ½Ð°Ñ†Ð¸Ñ ÑÑ‚Ñ€Ð¾Ðº: " << str << endl;
+
+
+    return 0;
 }
 
 DWORD WINAPI IntegerFunction(LPVOID parametr)
 {
-	if (str1.at(0) == '+' || str1.at(0) == '-')
-	{
-		if (str2.at(0) == '+' || str2.at(0) == '-')
-		{
-			for (int i = 1; i < str1.length(); i++)
-				if (str1.at(i) < '0' || str1.at(i) > '9')
-					flag = false;
-			for (int i = 1; i < str2.length(); i++)
-				if (str2.at(i) < '0' || str2.at(i) > '9')
-					flag = false;
-		}
-		else
-			flag = false;
-	}
-	else
-		flag = false;
+    if (str1.at(0) == '+' || str1.at(0) == '-')
+    {
+        if (str2.at(0) == '+' || str2.at(0) == '-')
+        {
+            for (int i = 1; i < str1.length(); i++)
+                if (str1.at(i) < '0' || str1.at(i) > '9')
+                    flag = false;
+            for (int i = 1; i < str2.length(); i++)
+                if (str2.at(i) < '0' || str2.at(i) > '9')
+                    flag = false;
+        }
+        else
+            flag = false;
+    }
+    else
+        flag = false;
 
-	return 0;
+    return 0;
 }
 
 DWORD WINAPI SumFunction(LPVOID parametr)
 {
-	int a, b;
+    int a, b;
 
-	a = atoi(str1.c_str());
-	b = atoi(str2.c_str());
+    a = atoi(str1.c_str());
+    b = atoi(str2.c_str());
 
-	sum = a + b;
+    sum = a + b;
 
-	return 0;
+    return 0;
 }
 
 DWORD WINAPI ConcatenationFunction(LPVOID parametr)
 {
-	str = str1 + str2;
+    str = str1 + str2;
 
-	return 0;
+    return 0;
 }
 
 int executeTime(HANDLE thread)
 {
-	FILETIME lpCreationTime; 
-	FILETIME lpExitTime; 
-	FILETIME lpKernelTime;
-	FILETIME lpUserTime;
+    FILETIME lpCreationTime;
+    FILETIME lpExitTime;
+    FILETIME lpKernelTime;
+    FILETIME lpUserTime;
 
-	SYSTEMTIME sCreationTime;
-	SYSTEMTIME sExitTime;
+    SYSTEMTIME sCreationTime;
+    SYSTEMTIME sExitTime;
 
-	GetThreadTimes(thread,
-		&lpCreationTime,
-		&lpExitTime,
-		&lpKernelTime,
-		&lpUserTime);
+    GetThreadTimes(thread,
+        &lpCreationTime,
+        &lpExitTime,
+        &lpKernelTime,
+        &lpUserTime);
 
-	FileTimeToSystemTime(&lpCreationTime, &sCreationTime);
-	FileTimeToSystemTime(&lpExitTime, &sExitTime);
-	int startTime = sCreationTime.wSecond * 1000 + sCreationTime.wMilliseconds;
-	int endTime = sExitTime.wSecond * 1000 + sExitTime.wMilliseconds;
+    FileTimeToSystemTime(&lpCreationTime, &sCreationTime);
+    FileTimeToSystemTime(&lpExitTime, &sExitTime);
+    int startTime = sCreationTime.wSecond * 1000 + sCreationTime.wMilliseconds;
+    int endTime = sExitTime.wSecond * 1000 + sExitTime.wMilliseconds;
 
-	return endTime - startTime;
+    return endTime - startTime;
 }

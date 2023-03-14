@@ -1,167 +1,166 @@
 #include <iostream>
 
-using namespace std; //использование пространства имен std
+using namespace std; //РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІР° РёРјРµРЅ std
 
 int main()
 {
-	setlocale(LC_ALL, "rus"); //установка локали
+    setlocale(LC_ALL, ".UTF8"); //СѓСЃС‚Р°РЅРѕРІРєР° Р»РѕРєР°Р»Рё
 
-	string time1, time2;
-	cout << "Введите два значения времени" << endl;
+    string time1, time2;
+    cout << "Р’РІРµРґРёС‚Рµ РґРІР° Р·РЅР°С‡РµРЅРёСЏ РІСЂРµРјРµРЅРё" << endl;
 
-	cout << endl;
-	cout << "1 время: ";
-	cin >> time1; //ввод первого значения времени
-	cout << "2 время: ";
-	cin >> time2; //ввод второго значения времени
+    cout << endl;
+    cout << "1 РІСЂРµРјСЏ: ";
+    cin >> time1; //РІРІРѕРґ РїРµСЂРІРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РІСЂРµРјРµРЅРё
+    cout << "2 РІСЂРµРјСЏ: ";
+    cin >> time2; //РІРІРѕРґ РІС‚РѕСЂРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ РІСЂРµРјРµРЅРё
 
-	int hour1, hour2, minute1, minute2, second1, second2;
+    int hour1, hour2, minute1, minute2, second1, second2;
 
-	second1 = atoi(time1.substr(6, 2).c_str()); //перевод часов из string в int
-	second2 = atoi(time2.substr(6, 2).c_str());
+    second1 = atoi(time1.substr(6, 2).c_str()); //РїРµСЂРµРІРѕРґ С‡Р°СЃРѕРІ РёР· string РІ int
+    second2 = atoi(time2.substr(6, 2).c_str());
 
-	minute1 = atoi(time1.substr(3, 2).c_str()); //перевод минут из string в int
-	minute2 = atoi(time2.substr(3, 2).c_str());
+    minute1 = atoi(time1.substr(3, 2).c_str()); //РїРµСЂРµРІРѕРґ РјРёРЅСѓС‚ РёР· string РІ int
+    minute2 = atoi(time2.substr(3, 2).c_str());
 
-	hour1 = atoi(time1.substr(0, 2).c_str()); //перевод секунд из string в int
-	hour2 = atoi(time2.substr(0, 2).c_str());
+    hour1 = atoi(time1.substr(0, 2).c_str()); //РїРµСЂРµРІРѕРґ СЃРµРєСѓРЅРґ РёР· string РІ int
+    hour2 = atoi(time2.substr(0, 2).c_str());
 
-	int hour = 0, minute = 0, second = 0;
-	
-	//алгоритм расчета количества часов, минут и секунл между двумя значениями времени
-	if (hour1 < hour2)
-	{
-		if (minute1 < minute2)
-		{
-			hour = hour2 - hour1;
-			if (second1 <= second2)
-			{
-				minute = minute2 - minute1;
-				second = second2 - second1;
-			}
-			if (second1 > second2)
-			{
-				minute = minute2 - minute1 - 1;
-				second = 60 - second1 + second2;
-			}
-		}
-		if (minute1 > minute2)
-		{
-			hour = hour2 - hour1 - 1;
-			if (second1 <= second2)
-			{
-				minute = 60 - minute1 + minute2;
-				second = second2 - second1;
-			}
-			if (second1 > second2)
-			{
-				minute = 60 - minute1 + minute2 - 1;
-				second = 60 - second1 + second2;
-			}
-		}
-		if (minute1 == minute2)
-		{
-			if (second1 <= second2)
-			{
-				hour = hour2 - hour1;
-				second = second2 - second1;
-			}
-			if (second1 > second2)
-			{
-				hour = hour2 - hour1 - 1;
-				minute = 59;
-				second = 60 - second1 + second2;
-			}
-		}
-	}
-	if (hour1 > hour2)
-	{
-		if (minute1 > minute2)
-		{
-			hour = hour1 - hour2;
-			if (second1 >= second2)
-			{
-				minute = minute1 - minute2;
-				second = second1 - second2;
-			}
-			if (second1 < second2)
-			{
-				minute = minute1 - minute2 - 1;
-				second = 60 - second2 + second1;
-			}
-		}
-		if (minute1 < minute2)
-		{
-			hour = hour1 - hour2 - 1;
-			if (second1 < second2)
-			{
-				minute = 60 - minute2 + minute1 - 1;
-				second = 60 - second2 + second1;
-			}
-			if (second1 >= second2)
-			{
-				minute = 12 - minute2 + minute1;
-				second = second1 - second2;
-			}
-		}
-		if (minute1 == minute2)
-		{
-			if (second1 < second2)
-			{
-				hour = hour1 - hour2 - 1;
-				minute = 59;
-				second = 60 - second2 + second1;
-			}
-			if (second1 >= second2)
-			{
-				hour = hour1 - hour2;
-				second = second1 - second2;
-			}
-		}
-	}
-	if (hour1 == hour2)
-	{
-		if (minute1 < minute2)
-		{
-			if (second1 <= second2)
-			{
-				minute = minute2 - minute1;
-				second = second2 - second1;
-			}
-			if (second1 > second2)
-			{
-				minute = minute2 - minute1 - 1;
-				second = 60 - second1 + second2;
-			}
-		}
-		if (minute1 > minute2)
-		{
-			if (second1 < second2)
-			{
-				minute = minute1 - minute2 - 1;
-				second = 60 - second2 + second1;
-			}
-			if (second1 >= second2)
-			{
-				minute = minute1 - minute2;
-				second = second1 - second2;
-			}
-		}
-		if (minute1 == minute2)
-		{
-			if (second1 <= second2)
-				second = second2 - second1;
-			if (second1 > second2)
-				second = second1 - second2;
-		}
-	}
+    int hour = 0, minute = 0, second = 0;
 
-	int seconds;
+    //Р°Р»РіРѕСЂРёС‚Рј СЂР°СЃС‡РµС‚Р° РєРѕР»РёС‡РµСЃС‚РІР° С‡Р°СЃРѕРІ, РјРёРЅСѓС‚ Рё СЃРµРєСѓРЅР» РјРµР¶РґСѓ РґРІСѓРјСЏ Р·РЅР°С‡РµРЅРёСЏРјРё РІСЂРµРјРµРЅРё
+    if (hour1 < hour2)
+    {
+        if (minute1 < minute2)
+        {
+            hour = hour2 - hour1;
+            if (second1 <= second2)
+            {
+                minute = minute2 - minute1;
+                second = second2 - second1;
+            }
+            if (second1 > second2)
+            {
+                minute = minute2 - minute1 - 1;
+                second = 60 - second1 + second2;
+            }
+        }
+        if (minute1 > minute2)
+        {
+            hour = hour2 - hour1 - 1;
+            if (second1 <= second2)
+            {
+                minute = 60 - minute1 + minute2;
+                second = second2 - second1;
+            }
+            if (second1 > second2)
+            {
+                minute = 60 - minute1 + minute2 - 1;
+                second = 60 - second1 + second2;
+            }
+        }
+        if (minute1 == minute2)
+        {
+            if (second1 <= second2)
+            {
+                hour = hour2 - hour1;
+                second = second2 - second1;
+            }
+            if (second1 > second2)
+            {
+                hour = hour2 - hour1 - 1;
+                minute = 59;
+                second = 60 - second1 + second2;
+            }
+        }
+    }
+    if (hour1 > hour2)
+    {
+        if (minute1 > minute2)
+        {
+            hour = hour1 - hour2;
+            if (second1 >= second2)
+            {
+                minute = minute1 - minute2;
+                second = second1 - second2;
+            }
+            if (second1 < second2)
+            {
+                minute = minute1 - minute2 - 1;
+                second = 60 - second2 + second1;
+            }
+        }
+        if (minute1 < minute2)
+        {
+            hour = hour1 - hour2 - 1;
+            if (second1 < second2)
+            {
+                minute = 60 - minute2 + minute1 - 1;
+                second = 60 - second2 + second1;
+            }
+            if (second1 >= second2)
+            {
+                minute = 12 - minute2 + minute1;
+                second = second1 - second2;
+            }
+        }
+        if (minute1 == minute2)
+        {
+            if (second1 < second2)
+            {
+                hour = hour1 - hour2 - 1;
+                minute = 59;
+                second = 60 - second2 + second1;
+            }
+            if (second1 >= second2)
+            {
+                hour = hour1 - hour2;
+                second = second1 - second2;
+            }
+        }
+    }
+    if (hour1 == hour2)
+    {
+        if (minute1 < minute2)
+        {
+            if (second1 <= second2)
+            {
+                minute = minute2 - minute1;
+                second = second2 - second1;
+            }
+            if (second1 > second2)
+            {
+                minute = minute2 - minute1 - 1;
+                second = 60 - second1 + second2;
+            }
+        }
+        if (minute1 > minute2)
+        {
+            if (second1 < second2)
+            {
+                minute = minute1 - minute2 - 1;
+                second = 60 - second2 + second1;
+            }
+            if (second1 >= second2)
+            {
+                minute = minute1 - minute2;
+                second = second1 - second2;
+            }
+        }
+        if (minute1 == minute2)
+        {
+            if (second1 <= second2)
+                second = second2 - second1;
+            if (second1 > second2)
+                second = second1 - second2;
+        }
+    }
 
-	seconds = hour * 60 * 60 + minute * 60 + second; //расчет количества секунд между двумя значениями времени
+    int seconds;
 
-	cout << endl << "Полное количество секунд между двумя значениями времени: " << seconds << endl;
+    seconds = hour * 60 * 60 + minute * 60 + second; //СЂР°СЃС‡РµС‚ РєРѕР»РёС‡РµСЃС‚РІР° СЃРµРєСѓРЅРґ РјРµР¶РґСѓ РґРІСѓРјСЏ Р·РЅР°С‡РµРЅРёСЏРјРё РІСЂРµРјРµРЅРё
 
+    cout << endl << "РџРѕР»РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ СЃРµРєСѓРЅРґ РјРµР¶РґСѓ РґРІСѓРјСЏ Р·РЅР°С‡РµРЅРёСЏРјРё РІСЂРµРјРµРЅРё: " << seconds << endl;
 
-	return 0;
+    return 0;
 }

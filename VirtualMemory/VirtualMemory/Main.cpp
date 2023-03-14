@@ -1,5 +1,5 @@
 #include <iostream>
-#include<windows.h>
+#include <windows.h>
 
 int const SIZE_15KB = 15 * 1024;
 
@@ -7,165 +7,165 @@ using namespace std;
 
 struct Node
 {
-	void* p;
-	Node* next;
+    void* p;
+    Node* next;
 };
 
 struct Queue
 {
-	int size;
-	Node* first;
-	Node* last;
+    int size;
+    Node* first;
+    Node* last;
 };
 
 void creation(Queue* queue)
 {
-	queue->first = new Node;
-	queue->first->next = NULL;
-	queue->last = queue->first;
-	queue->size = 0;
+    queue->first = new Node;
+    queue->first->next = NULL;
+    queue->last = queue->first;
+    queue->size = 0;
 }
 
 bool isEmpty(Queue* queue)
 {
-	if (queue->first == queue->last) 
-		return true;
-	else 
-		return false;
+    if (queue->first == queue->last)
+        return true;
+    else
+        return false;
 }
 
 void* top(Queue* queue)
 {
-	return queue->first->next->p;
+    return queue->first->next->p;
 }
 
 void add(Queue* queue)
 {
-	queue->last->next = new Node;
-	queue->last = queue->last->next;
-	queue->last->p = VirtualAlloc(NULL, SIZE_15KB, MEM_COMMIT, PAGE_READONLY);
-	queue->last->next = NULL;
-	queue->size++;
-	cout << "\nÝëåìåíò äîáàâëåí\n";
+    queue->last->next = new Node;
+    queue->last = queue->last->next;
+    queue->last->p = VirtualAlloc(NULL, SIZE_15KB, MEM_COMMIT, PAGE_READONLY);
+    queue->last->next = NULL;
+    queue->size++;
+    cout << "\nÐ­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ð´Ð¾Ð±Ð°Ð²Ð»ÐµÐ½\n";
 }
 
 bool cleanMemory(Node* q)
 {
-	return VirtualFree(q->p, 0, MEM_RELEASE);
+    return VirtualFree(q->p, 0, MEM_RELEASE);
 }
 
 void Delete(Queue* queue)
 {
-	Node* temp;
-	temp = queue->first;
-	queue->first = queue->first->next;
-	queue->size--;
-	cleanMemory(temp);
-	delete(temp);
-	cout << "\nÝëåìåíò óäàëåí\n";
+    Node* temp;
+    temp = queue->first;
+    queue->first = queue->first->next;
+    queue->size--;
+    cleanMemory(temp);
+    delete(temp);
+    cout << "\nÐ­Ð»ÐµÐ¼ÐµÐ½Ñ‚ ÑƒÐ´Ð°Ð»ÐµÐ½\n";
 }
 
 int size(Queue* queue)
 {
-	return queue->size;
+    return queue->size;
 }
 
 void cleanAll(Queue* queue)
 {
-	Node* h;
-	for (h = queue->first->next; h != NULL; h = h->next)
-		VirtualFree(h->p, 0, MEM_RELEASE);
+    Node* h;
+    for (h = queue->first->next; h != NULL; h = h->next)
+        VirtualFree(h->p, 0, MEM_RELEASE);
 }
 
 void view(Queue* queue)
 {
-	Node* h;
-	cout << endl <<"Î÷åðåäü:" << endl << endl;
-	for (h = queue->first->next; h != NULL; h = h->next)
-	{
-		cout << h->p << endl;
-	}
-	cout << endl;
+    Node* h;
+    cout << endl << "ÐžÑ‡ÐµÑ€ÐµÐ´ÑŒ:" << endl << endl;
+    for (h = queue->first->next; h != NULL; h = h->next)
+    {
+        cout << h->p << endl;
+    }
+    cout << endl;
 
 }
 
 void duplicate(Queue* queue)
 {
-	void* w;
-	w = queue->last->p;
-	queue->last->next = new Node;
-	queue->last = queue->last->next;
-	queue->last->p = w;
-	queue->last->next = NULL;
-	queue->size++;
-	cout << "\nÝëåìåíò ïðîäóáëèðîâàí\n";
+    void* w;
+    w = queue->last->p;
+    queue->last->next = new Node;
+    queue->last = queue->last->next;
+    queue->last->p = w;
+    queue->last->next = NULL;
+    queue->size++;
+    cout << "\nÐ­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ð¿Ñ€Ð¾Ð´ÑƒÐ±Ð»Ð¸Ñ€Ð¾Ð²Ð°Ð½\n";
 }
 
 void main()
 {
-	setlocale(LC_ALL, "Rus");
-	Queue queue;
-	creation(&queue);
-	char number;
-	do
-	{
-		cout << "1. Ïðîâåðèòü, î÷åðåäü ïóñòà/íå ïóñòà\n";
-		cout << "2. Äîáàâèòü ýëåìåíò â õâîñò î÷åðåäè\n";
-		cout << "3. Óäàëèòü ýëåìåíò èç ãîëîâû î÷åðåäè\n";
-		cout << "4. Ïðîñìîòðåòü ãîëîâó î÷åðåäè\n";
-		cout << "5. Ïðîäóáëèðîâàòü õâîñò î÷åðåäè\n";
-		cout << "6. Ïðîñìîòðåòü âñå ýëåìåíòû î÷åðåäè\n";
-		cout << "0. Âûéòè\n\n";
-		cout << "Íîìåð êîìàíäû > "; cin >> number;
-		switch (number)
-		{
-		case '1':
-			if (isEmpty(&queue))
-				cout << "\nÎ÷åðåäü ïóñòà\n\n";
-			else
-				cout << "\nÎ÷åðåäü íå ïóñòà\n\n";
-			break;
-		case '2': 
-			add(&queue);
-			view(&queue);
-			break;
-		case '3':
-			if (isEmpty(&queue))
-				cout << endl << "Î÷åðåäü ïóñòà\n\n";
-			else
-			{
-				Delete(&queue);
-				view(&queue);
-			}
-			break;
-		case '4':
-			if (isEmpty(&queue))
-				cout << "\nÎ÷åðåäü ïóñòà\n\n";
-			else
-				cout << "\nÃîëîâà î÷åðåäè: " << top(&queue) << "\n\n";
-			break;
-		case '5':
-			if (isEmpty(&queue))
-				cout << "\nÎ÷åðåäü ïóñòà\n\n";
-			else
-			{
-				duplicate(&queue);
-				view(&queue);
-			}
-			break;
-		case '6':
-			if (isEmpty(&queue))
-				cout << "\nÎ÷åðåäü ïóñòà\n\n";
-			else
-				view(&queue);
-			break;
-		case '0':
-			cleanAll(&queue);
-			break;
-		default: cout << endl << "Êîìàíäà íå îïðåäåëåíà\n\n";
-			break;
-		}
-	} while (number != '0');
+    setlocale(LC_ALL, ".UTF8");
+    Queue queue;
+    creation(&queue);
+    char number;
+    do
+    {
+        cout << "1. ÐŸÑ€Ð¾Ð²ÐµÑ€Ð¸Ñ‚ÑŒ, Ð¾Ñ‡ÐµÑ€ÐµÐ´ÑŒ Ð¿ÑƒÑÑ‚Ð°/Ð½Ðµ Ð¿ÑƒÑÑ‚Ð°\n";
+        cout << "2. Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð² Ñ…Ð²Ð¾ÑÑ‚ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸\n";
+        cout << "3. Ð£Ð´Ð°Ð»Ð¸Ñ‚ÑŒ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð¸Ð· Ð³Ð¾Ð»Ð¾Ð²Ñ‹ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸\n";
+        cout << "4. ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ Ð³Ð¾Ð»Ð¾Ð²Ñƒ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸\n";
+        cout << "5. ÐŸÑ€Ð¾Ð´ÑƒÐ±Ð»Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒ Ñ…Ð²Ð¾ÑÑ‚ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸\n";
+        cout << "6. ÐŸÑ€Ð¾ÑÐ¼Ð¾Ñ‚Ñ€ÐµÑ‚ÑŒ Ð²ÑÐµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ‹ Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸\n";
+        cout << "0. Ð’Ñ‹Ð¹Ñ‚Ð¸\n\n";
+        cout << "ÐÐ¾Ð¼ÐµÑ€ ÐºÐ¾Ð¼Ð°Ð½Ð´Ñ‹ > "; cin >> number;
+        switch (number)
+        {
+        case '1':
+            if (isEmpty(&queue))
+                cout << "\nÐžÑ‡ÐµÑ€ÐµÐ´ÑŒ Ð¿ÑƒÑÑ‚Ð°\n\n";
+            else
+                cout << "\nÐžÑ‡ÐµÑ€ÐµÐ´ÑŒ Ð½Ðµ Ð¿ÑƒÑÑ‚Ð°\n\n";
+            break;
+        case '2':
+            add(&queue);
+            view(&queue);
+            break;
+        case '3':
+            if (isEmpty(&queue))
+                cout << endl << "ÐžÑ‡ÐµÑ€ÐµÐ´ÑŒ Ð¿ÑƒÑÑ‚Ð°\n\n";
+            else
+            {
+                Delete(&queue);
+                view(&queue);
+            }
+            break;
+        case '4':
+            if (isEmpty(&queue))
+                cout << "\nÐžÑ‡ÐµÑ€ÐµÐ´ÑŒ Ð¿ÑƒÑÑ‚Ð°\n\n";
+            else
+                cout << "\nÐ“Ð¾Ð»Ð¾Ð²Ð° Ð¾Ñ‡ÐµÑ€ÐµÐ´Ð¸: " << top(&queue) << "\n\n";
+            break;
+        case '5':
+            if (isEmpty(&queue))
+                cout << "\nÐžÑ‡ÐµÑ€ÐµÐ´ÑŒ Ð¿ÑƒÑÑ‚Ð°\n\n";
+            else
+            {
+                duplicate(&queue);
+                view(&queue);
+            }
+            break;
+        case '6':
+            if (isEmpty(&queue))
+                cout << "\nÐžÑ‡ÐµÑ€ÐµÐ´ÑŒ Ð¿ÑƒÑÑ‚Ð°\n\n";
+            else
+                view(&queue);
+            break;
+        case '0':
+            cleanAll(&queue);
+            break;
+        default: cout << endl << "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð° Ð½Ðµ Ð¾Ð¿Ñ€ÐµÐ´ÐµÐ»ÐµÐ½Ð°\n\n";
+            break;
+        }
+    } while (number != '0');
 
-	system("pause");
+    system("pause");
 }

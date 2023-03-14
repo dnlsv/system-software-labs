@@ -11,81 +11,81 @@ DWORD WINAPI IntegerFunction(LPVOID);
 DWORD WINAPI SumFunction(LPVOID);
 DWORD WINAPI ConcatenationFunction(LPVOID);
 
-int main() 
+int main()
 {
-	setlocale(LC_ALL, "rus");
-	
-	flag = true;
+    setlocale(LC_ALL, ".UTF8");
 
-	cout << "Ââåäèòå äâå ñòðîêè" << endl;
-	cout << "1 ñòðîêà: ";
-	cin >> str1;
-	cout << "2 ñòðîêà: ";
-	cin >> str2;
+    flag = true;
 
-	DWORD integerThread;
-	CreateThread(NULL, NULL, IntegerFunction, NULL, NULL, &integerThread);
-	Sleep(1000);
+    cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð²Ðµ ÑÑ‚Ñ€Ð¾ÐºÐ¸" << endl;
+    cout << "1 ÑÑ‚Ñ€Ð¾ÐºÐ°: ";
+    cin >> str1;
+    cout << "2 ÑÑ‚Ñ€Ð¾ÐºÐ°: ";
+    cin >> str2;
 
-	if (flag == true)
-	{
-		DWORD sumThread;
-		CreateThread(NULL, NULL, SumFunction, NULL, NULL, &sumThread);
-		Sleep(1000);
-	}
-	else
-	{
-		DWORD concatenationThread;
-		CreateThread(NULL, NULL, ConcatenationFunction, NULL, NULL, &concatenationThread);
-		Sleep(1000);
-	}
+    DWORD integerThread;
+    CreateThread(NULL, NULL, IntegerFunction, NULL, NULL, &integerThread);
+    Sleep(1000);
 
-	if (flag == true)
-		cout << endl << "Ñóììà ÷èñåë: " << sum << endl;
-	else
-		cout << endl << "Êîíêàòåíàöèÿ ñòðîê: " << str << endl;
+    if (flag == true)
+    {
+        DWORD sumThread;
+        CreateThread(NULL, NULL, SumFunction, NULL, NULL, &sumThread);
+        Sleep(1000);
+    }
+    else
+    {
+        DWORD concatenationThread;
+        CreateThread(NULL, NULL, ConcatenationFunction, NULL, NULL, &concatenationThread);
+        Sleep(1000);
+    }
+
+    if (flag == true)
+        cout << endl << "Ð¡ÑƒÐ¼Ð¼Ð° Ñ‡Ð¸ÑÐµÐ»: " << sum << endl;
+    else
+        cout << endl << "ÐšÐ¾Ð½ÐºÐ°Ñ‚ÐµÐ½Ð°Ñ†Ð¸Ñ ÑÑ‚Ñ€Ð¾Ðº: " << str << endl;
 
 
-	return 0;
+    return 0;
 }
 
-DWORD WINAPI IntegerFunction(LPVOID parametr) 
+DWORD WINAPI IntegerFunction(LPVOID parametr)
 {
-	if (str1.at(0) == '+' || str1.at(0) == '-')
-	{
-		if (str2.at(0) == '+' || str2.at(0) == '-')
-		{
-			for (int i = 1; i < str1.length(); i++)
-				if (str1.at(i) < '0' || str1.at(i) > '9')
-					flag = false;
-			for (int i = 1; i < str2.length(); i++)
-				if (str2.at(i) < '0' || str2.at(i) > '9')
-					flag = false;
-		}
-		else
-			flag = false;
-	}
-	else
-		flag = false;
+    if (str1.at(0) == '+' || str1.at(0) == '-')
+    {
+        if (str2.at(0) == '+' || str2.at(0) == '-')
+        {
+            for (int i = 1; i < str1.length(); i++)
+                if (str1.at(i) < '0' || str1.at(i) > '9')
+                    flag = false;
+            for (int i = 1; i < str2.length(); i++)
+                if (str2.at(i) < '0' || str2.at(i) > '9')
+                    flag = false;
+        }
+        else
+            flag = false;
+    }
+    else
+        flag = false;
 
-	return 0;
+    return 0;
 }
 
 DWORD WINAPI SumFunction(LPVOID parametr)
 {
-	int a, b;
+    int a, b;
 
-	a = atoi(str1.c_str());
-	b = atoi(str2.c_str());
-	
-	sum = a + b;
+    a = atoi(str1.c_str());
+    b = atoi(str2.c_str());
 
-	return 0;
+    sum = a + b;
+
+    return 0;
 }
 
 DWORD WINAPI ConcatenationFunction(LPVOID parametr)
 {
-	str = str1 + str2;
+    str = str1 + str2;
 
-	return 0;
+    return 0;
 }

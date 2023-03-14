@@ -8,7 +8,7 @@ using namespace std;
 
 void main(void)
 {
-    setlocale(LC_ALL, "rus");
+    setlocale(LC_ALL, ".UTF8");
 
     HANDLE NPipe;
     char buffer[256];
@@ -16,20 +16,20 @@ void main(void)
 
     LPCTSTR path = L"\\\\.\\Pipe\\pipe1";
 
-    // Создание ИК
+    // РЎРѕР·РґР°РЅРёРµ РРљ
     if ((NPipe = CreateNamedPipe(path,
         PIPE_ACCESS_DUPLEX, PIPE_TYPE_BYTE | PIPE_READMODE_BYTE, 1, 0, 0, 2000, NULL)) ==
         INVALID_HANDLE_VALUE)
     {
-        printf("Ошибка при создании конвейера %d\n",
+        printf("РћС€РёР±РєР° РїСЂРё СЃРѕР·РґР°РЅРёРё РєРѕРЅРІРµР№РµСЂР° %d\n",
             GetLastError());
         return;
     }
-    printf("Сервер запущен.\n");
+    printf("РЎРµСЂРІРµСЂ Р·Р°РїСѓС‰РµРЅ.\n");
 
     if (ConnectNamedPipe(NPipe, NULL) == 0)
     {
-        printf("Ошибка при установлении соединения %d\n",
+        printf("РћС€РёР±РєР° РїСЂРё СѓСЃС‚Р°РЅРѕРІР»РµРЅРёРё СЃРѕРµРґРёРЅРµРЅРёСЏ %d\n",
             GetLastError());
         CloseHandle(NPipe);
         return;
@@ -37,7 +37,7 @@ void main(void)
 
     if (ReadFile(NPipe, buffer, sizeof(buffer), &NumberOfBytesRead, NULL) <= 0)
     {
-        printf("Ошибка при чтении из конвейера %d\n",
+        printf("РћС€РёР±РєР° РїСЂРё С‡С‚РµРЅРёРё РёР· РєРѕРЅРІРµР№РµСЂР° %d\n",
             GetLastError());
         CloseHandle(NPipe);
         return;
@@ -63,13 +63,15 @@ void main(void)
     {
         cout << vect.at(i) << " ";
     }
-
+    cout << endl;
 
     if (DisconnectNamedPipe(NPipe) == 0)
     {
-        printf("Ошибка при разрыве соединения %d\n",
+        printf("РћС€РёР±РєР° РїСЂРё СЂР°Р·СЂС‹РІРµ СЃРѕРµРґРёРЅРµРЅРёСЏ %d\n",
             GetLastError());
         return;
     }
     CloseHandle(NPipe);
+
+    system("pause");
 }

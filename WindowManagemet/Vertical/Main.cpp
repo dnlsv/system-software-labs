@@ -3,7 +3,7 @@
 
 bool headline = false, dblclick = false;
 
-static TCHAR title[] = _T("Приложение с окошком");
+static TCHAR title[] = _T("DesktopApp");
 static TCHAR g_szClassName[] = _T("WindowApplication");
 
 LRESULT CALLBACK WindowProcedure(HWND, UINT, WPARAM, LPARAM);
@@ -20,8 +20,8 @@ int WINAPI WinMain(HINSTANCE ThisInstance, HINSTANCE PreviousInstance, LPSTR lps
     WindowClass.lpszMenuName = NULL;
     WindowClass.hIcon = LoadIcon(NULL, IDI_APPLICATION);
     WindowClass.hCursor = LoadCursor(NULL, IDC_ARROW);
-    // перерисовка всего окна при изменении высоты и ширины окна,
-    // а также перехват двойного клика
+    // РїРµСЂРµСЂРёСЃРѕРІРєР° РІСЃРµРіРѕ РѕРєРЅР° РїСЂРё РёР·РјРµРЅРµРЅРёРё РІС‹СЃРѕС‚С‹ Рё С€РёСЂРёРЅС‹ РѕРєРЅР°,
+    // Р° С‚Р°РєР¶Рµ РїРµСЂРµС…РІР°С‚ РґРІРѕР№РЅРѕРіРѕ РєР»РёРєР°
     WindowClass.style = CS_HREDRAW | CS_VREDRAW | CS_DBLCLKS;
     WindowClass.cbClsExtra = WindowClass.cbWndExtra = 0;
     WindowClass.hbrBackground = (HBRUSH)COLOR_BACKGROUND;
@@ -29,7 +29,7 @@ int WINAPI WinMain(HINSTANCE ThisInstance, HINSTANCE PreviousInstance, LPSTR lps
     if (0 == RegisterClass(&WindowClass))
         return 0;
 
-    // вычисление координат центра экрана
+    // РІС‹С‡РёСЃР»РµРЅРёРµ РєРѕРѕСЂРґРёРЅР°С‚ С†РµРЅС‚СЂР° СЌРєСЂР°РЅР°
     INT x = (GetSystemMetrics(SM_CXSCREEN) - 600) / 2;
     INT y = (GetSystemMetrics(SM_CYSCREEN) - 375) / 2;
 
@@ -155,7 +155,6 @@ LRESULT CALLBACK WindowProcedure(HWND hWindow, UINT uMessage, WPARAM wFirstParam
     }
     return 0;
 }
-
 
 //#include <windows.h>
 //#include <tchar.h>
